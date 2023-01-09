@@ -45,6 +45,11 @@ jobs:
   build:
     runs-on: windows-latest 
     steps:
+    - name: Collect Workflow Telemetry
+      uses: runforesight/foresight-workflow-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: d8c29f76-ffc3-48b7-8881-801c234ec238
     - name: Checkout
       uses: actions/checkout@v3
 
@@ -56,4 +61,13 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test
+      run: dotnet test --logger "trx;logfilename=testResults.trx"
+    
+    - name: Analyze Test and/or Coverage Results
+      uses: runforesight/foresight-test-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: d8c29f76-ffc3-48b7-8881-801c234ec238
+        test_format: TRX
+        test_framework: XUNIT2
+        test_path: testResults.trx
