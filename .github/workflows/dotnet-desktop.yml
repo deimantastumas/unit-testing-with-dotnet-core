@@ -43,7 +43,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest 
+    runs-on: ubuntu
     steps:
     - name: Collect Workflow Telemetry
       uses: runforesight/foresight-workflow-kit-action@v1
@@ -70,4 +70,4 @@ jobs:
         api_key: d8c29f76-ffc3-48b7-8881-801c234ec238
         test_format: TRX
         test_framework: XUNIT2
-        test_path: testResults.trx
+        test_path: ./app-test/TestResults/testResults.trx
