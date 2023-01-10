@@ -15,7 +15,7 @@ namespace app_test
         {
             Console.WriteLine("Testing {0} + {0}", value);
             var actual = Calculator.Add(value, value);
-            var expected = -1000;
+            var expected = value + value;
             Assert.AreEqual(actual, expected);
         }
 
